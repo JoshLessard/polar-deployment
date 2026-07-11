@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - github.com/JoshLessard/catalog-service/k8s?ref=main
+
+patches:
+  - path: patch-env.yaml
+
+configMapGenerator:
+  - behavior: merge
+    files:
+      - application-staging.yaml
+    name: catalog-config
+
+images:
+  - name: catalog-service
+    newName: ghcr.io/joshlessard/catalog-service
+    newTag: latest
+
+replicas:
+  - name: catalog-service
+    count: 2

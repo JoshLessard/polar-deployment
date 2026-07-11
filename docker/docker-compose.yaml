@@ -4,7 +4,6 @@ services:
   edge-service:
     depends_on:
       - fluent-bit
-      - config-service
       - catalog-service
       - order-service
     image: "edge-service"
@@ -79,7 +78,6 @@ services:
   order-service:
     depends_on:
       - fluent-bit
-      - config-service
       - catalog-service
       - polar-postgres
       - polar-rabbitmq
@@ -110,7 +108,6 @@ services:
   dispatcher-service:
     depends_on:
       - fluent-bit
-      - config-service
       - polar-rabbitmq
     image: "dispatcher-service"
     container_name: "dispatcher-service"
